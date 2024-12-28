@@ -1,34 +1,32 @@
 <!-- eslint-disable vuejs-accessibility/no-static-element-interactions -->
 <template>
   <div class="w-full h-full">
-    <header ref="referenceRef" class="relative">
+    <header ref="referenceRef" class="relative z-50 ">
       <div
-        class="flex justify-between items-center flex-wrap md:flex-nowrap px-4 md:px-10 py-2 md:py-5 w-full h-full border-0 bg-primary-700 border-neutral-200 md:h-20 md:z-10">
+        class="flex justify-between items-center flex-wrap md:flex-nowrap px-4 md:px-10 py-2 md:py-5 w-full h-full border-0  border-neutral-200 md:h-20 md:z-10">
         <div class="flex items-center">
           <SfButton variant="tertiary" square aria-label="Close menu"
             class="block md:hidden mr-5 bg-transparent hover:bg-primary-800 hover:text-white active:bg-primary-900 active:text-white"
             @click="openMenu([])">
-            <SfIconMenu class="text-white" />
+            <SfIconMenu class="text-primary" />
           </SfButton>
           <a href="#" aria-label="SF Homepage"
             class="flex shrink-0 w-8 h-8 lg:w-[12.5rem] lg:h-[1.75rem] items-center mr-auto text-white md:mr-10 focus-visible:outline focus-visible:outline-offset focus-visible:rounded-sm">
             <picture>
-              <source
-                srcset="https://storage.googleapis.com/sfui_docs_artifacts_bucket_public/production/vsf_logo_white.svg"
-                media="(min-width: 1024px)" />
+             
               <img
-                src="https://storage.googleapis.com/sfui_docs_artifacts_bucket_public/production/vsf_logo_sign_white.svg"
-                alt="Sf Logo" />
+                src="/images/headerImages/[www.rabbitic.com-name-logo-1].png"
+                alt="Sf Logo" class="w-64" />
             </picture>
           </a>
         </div>
-        <form role="search" class="hidden md:flex flex-[100%] ml-10" @submit.prevent="search">
+        <form role="search" class="hidden md:flex flex-[100%] ml-10 px-64" @submit.prevent="search">
           <SfInput v-model="inputValue" type="search" class="[&::-webkit-search-cancel-button]:appearance-none"
             placeholder="Search" wrapper-class="flex-1 h-10 pr-0" size="base">
             <template #suffix>
               <span class="flex items-center">
                 <SfButton variant="tertiary" square aria-label="search" type="submit"
-                  class="rounded-l-none hover:bg-transparent active:bg-transparent">
+                  class="rounded-l-none hover:bg-transparent active:bg-transparent ">
                   <SfIconSearch />
                 </SfButton>
               </span>
@@ -37,19 +35,19 @@
         </form>
         <nav class="flex flex-nowrap justify-end items-center md:ml-10 gap-x-1">
           <SfButton v-for="actionItem in actionItems" :key="actionItem.ariaLabel" :aria-label="actionItem.ariaLabel"
-            class="text-white bg-transparent hover:bg-primary-800 hover:text-white active:bg-primary-900 active:text-white"
+            class="text-primary-800 bg-transparent hover:bg-primary-800 hover:text-white active:bg-primary-900 active:text-white"
             variant="tertiary" square>
             <template #prefix>
               <Component :is="actionItem.icon" />
             </template>
-            <p v-if="actionItem.role === 'login'" class="hidden lg:inline-flex whitespace-nowrap mr-2">
+            <p v-if="actionItem.role === 'login'" class="hidden lg:inline-flex whitespace-nowrap mr-2 ">
               {{ actionItem.label }}
             </p>
           </SfButton>
         </nav>
-        <form role="search" class="flex md:hidden flex-[100%] my-2" @submit.prevent="search">
-          <SfInput v-model="inputValue" type="search" class="[&::-webkit-search-cancel-button]:appearance-none"
-            placeholder="Search" wrapper-class="flex-1 h-10 pr-0" size="base">
+        <form role="search" class="flex md:hidden flex-[100%] my-2  " @submit.prevent="search">
+          <SfInput v-model="inputValue" type="search" class="[&::-webkit-search-cancel-button]:appearance-none "
+            placeholder="Search" wrapper-class="flex-1 h-10 pr-0 " size="base">
             <template #suffix>
               <span class="flex items-center">
                 <SfButton variant="tertiary" square aria-label="search" type="submit"
@@ -63,7 +61,7 @@
       </div>
       <!-- Desktop dropdown -->
       <nav ref="floatingRef">
-        <ul class="hidden md:flex px-6 py-2 bg-white border-b border-b-neutral-200 border-b-solid" @blur="(event) => {
+        <ul class="hidden md:flex px-6 py-2 bg-primary-800 border-b border-b-neutral-200 border-b-solid" @blur="(event:any) => {
           if (!(event.currentTarget as Element).contains(event.relatedTarget as Element)) {
             close();
           }
@@ -71,11 +69,11 @@
           ">
           <li v-for="(menuNode, index) in content.children" :key="menuNode.key">
             <SfButton ref="triggerRefs" variant="tertiary"
-              class="group mr-2 !text-neutral-900 hover:!bg-neutral-200 hover:!text-neutral-700 active:!bg-neutral-300 active:!text-neutral-900"
+              class="group mr-2 !text-white hover:!bg-neutral-200 hover:!text-neutral-700 active:!bg-neutral-300 active:!text-neutral-900"
               @mouseenter="openMenu([menuNode.key])" @click="openMenu([menuNode.key])">
               <span>{{ menuNode.value.label }}</span>
               <SfIconChevronRight
-                class="rotate-90 text-neutral-500 group-hover:text-neutral-700 group-active:text-neutral-900" />
+                class="rotate-90 text-white group-hover:text-neutral-700 group-active:text-white" />
             </SfButton>
 
             <div v-if="isOpen && activeNode.length === 1 && activeNode[0] === menuNode.key" :key="activeMenu.key"

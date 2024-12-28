@@ -2,12 +2,16 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
-  css: ["~/assets/css/main.css"],
+  css: ["~/assets/css/main.css",],
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
+
     },
   },
-  modules: ["@storefront-ui/nuxt"],
+  modules: ["@storefront-ui/nuxt", 'nuxt-keen-slider'],
+  build: {
+    transpile: ['ant-design-vue']
+  }
 });
